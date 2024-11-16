@@ -18,11 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework.schemas import get_schema_view
-from chat.views import UserViewSet
+from chat.views import UserViewSet, FAQViewSet
 
 router = DefaultRouter()
-router.register('users', UserViewSet, basename='user')
-
+router.register(r'users', UserViewSet, basename='user')
+router.register(r'faqs', FAQViewSet, basename='faq')
 
 
 urlpatterns = [

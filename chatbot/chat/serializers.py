@@ -47,7 +47,7 @@ class ConversationSerializer(serializers.ModelSerializer):
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:
         model = FAQ
-        fields = ['id', 'conversationid', 'question', 'answer', 'category']
+        fields = ['id', 'question', 'answer', 'category']
     def validate(self, data):
         """
         Check that FAQ's question and answer are not longer than 150 characters
