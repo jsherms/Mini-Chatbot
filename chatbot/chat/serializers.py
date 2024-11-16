@@ -16,21 +16,10 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
 class ConversationSerializer(serializers.ModelSerializer):
-    user_name = serializers.CharField(write_only=True)
-    user = serializers.IntegerField(read_only=True, source='user.id')
 
     class Meta:
         model = Conversation
-        fields = ['id', 'user', 'user_name', 'created_at']
-
-    def create(self, validated_data):
-        user_name = validated_data.pop('user_name')
-        try: 
-            user = User.objects.get(name=user_name)
-        except User.DoesNotExist:
-             raise serializers.ValidationError({"user": f"User '{user_name}' does not exist"})
-        conversation = Conversation.objects.create(user=user, **validated_data)
-        return conversation
+        fields = ['id', 'user', 'created_at']
     
     def validate(self, data):
         user = data.get('user')
