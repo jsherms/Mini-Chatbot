@@ -17,15 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from chat.views import UserViewSet, ConversationViewSet, FAQViewSet
+from chat.views import UserViewSet, ConversationViewSet, FAQViewSet, MessageViewSet
 
 router = DefaultRouter()
-router.register(r'users', UserViewSet, basename='user')
-router.register(r'faqs', FAQViewSet, basename='faq')
-router.register(r'conversation', ConversationViewSet, basename='conversation')
-
+router.register(r'register_user', UserViewSet, basename='user')
+router.register(r'get_faqs', FAQViewSet, basename='faq')
+router.register(r'create_conversation', ConversationViewSet, basename='conversation')
+router.register(r'send_message', MessageViewSet, basename='message')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls))
+    path('', include(router.urls)),
 ]
