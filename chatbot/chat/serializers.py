@@ -22,14 +22,16 @@ class ConversationSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'created_at']
     
     def validate(self, data):
+        """
+        Validate user is in database before creating a conversation
+        """
         user = data.get('user')
         if isinstance(user, str):
             try:
-                user = User.objects.get(name=user)  # Look up the user by name
+                user = User.objects.get(name=user)
             except User.DoesNotExist:
                 raise serializers.ValidationError({"user": f"User '{user}' does not exist in the database"})
-            
-            # Replace 'user' with the user's primary key (ID)
+
             data['user'] = user.id
         return data
 

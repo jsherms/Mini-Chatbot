@@ -3,8 +3,6 @@ from .models import User, Conversation, FAQ
 from .serializers import UserSerializer, ConversationSerializer, FAQSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django_filters.rest_framework import DjangoFilterBackend
-from .filters import FAQFilter
 
 class UserViewSet(viewsets.ModelViewSet):
     """
