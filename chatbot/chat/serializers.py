@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Conversation, FAQ
+from .models import User, Conversation, FAQ, Message
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,7 +16,6 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
 class ConversationSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Conversation
         fields = ['id', 'user', 'created_at']
@@ -35,16 +34,18 @@ class ConversationSerializer(serializers.ModelSerializer):
             data['user'] = user.id
         return data
 
+class MessageSerializer(serializers.Serializer):
+    class Meta:
+        model = Message
+        fields = ['conversation_id', 'question', 'response']
+
+    conversation_id = serializers.IntegerField(required=True, help_text="The unique ID of the conversation")
+    question = serializers.CharField(required=True, help_text="The question to ask")
+
+
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:
         model = FAQ
         fields = ['id', 'question', 'answer', 'category']
-    def validate(self, data):
-        """
-        Check that FAQ's question and answer are not longer than 150 characters
-        """
-        if len(data['question']) > 150:
-            raise serializers.ValidationError("Question cannot be longer than 150 characters")
-        if len(data['answer']) > 150:
-            raise serializers.ValidationError("Answer cannot be longer than 150 characters")
-        return data
+    question = serializers.CharField(read_only=True)
+    answer = serializers.CharField(read_only=True)
