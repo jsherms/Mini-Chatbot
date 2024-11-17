@@ -7,7 +7,7 @@ Prerequisites:
 
 Follow these instructions to get the chatbot Restful API working on your local machine
 ## 1. Clone repository ##
-Please navigate to the directory where you would like to clone the repository and xecute these commands in the terminal
+Please navigate to the directory where you would like to clone the repository and execute these commands in the terminal
 
      git clone https://github.com/jsherms/Mini-Chatbot.git
      cd Mini-Chatbot
