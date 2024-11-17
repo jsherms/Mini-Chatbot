@@ -115,9 +115,9 @@ class ConversationViewSet(viewsets.ModelViewSet):
         """
         An endpoint for creating a new conversation
         """
-        user_id = request.data.get('user_id')
+        user_id = request.data.get('user')
         if not user_id:
-            return Response({"error": "user_id is required"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "user is required"}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
             user = User.objects.get(id=user_id)
